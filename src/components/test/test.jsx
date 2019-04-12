@@ -16,7 +16,8 @@ class Test extends PureComponent {
 
   static propTypes = {
     test: PropTypes.object,
-    enableCode: PropTypes.bool
+    enableCode: PropTypes.bool,
+    expandedAll: PropTypes.bool
   }
 
   static defaultProps = {
@@ -34,8 +35,14 @@ class Test extends PureComponent {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.expandedAll !== this.state.expanded) {
+      this.setState({ expanded: nextProps.expandedAll });
+    }
+  }
+
   render() {
-    const { test, enableCode } = this.props;
+    const { test, enableCode, expandedAll } = this.props;
     const { uuid, title, speed, duration, pass, fail, pending,
       skipped, isHook, err, code, context } = test;
 
@@ -70,7 +77,7 @@ class Test extends PureComponent {
     };
 
     const cxname = cx('component', {
-      expanded: this.state.expanded,
+      expanded: this.state.expanded || expandedAll,
       passed: pass,
       failed: fail,
       pending,

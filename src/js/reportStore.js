@@ -27,7 +27,8 @@ class ReportStore {
       showPassed: config.showPassed !== undefined ? config.showPassed : true,
       showPending: config.showPending !== undefined ? config.showPending : true,
       showSkipped: config.showSkipped !== undefined ? config.showSkipped : false,
-      sideNavOpen: false
+      sideNavOpen: false,
+      expandedAll: false
     });
   }
 
@@ -55,6 +56,11 @@ class ReportStore {
     this.isLoading = (isLoading !== undefined)
       ? isLoading
       : !this.isLoading;
+  }
+
+  @action.bound onToggleExpand() {
+    this.expandedAll = !this.expandedAll;
+    console.log(`Expanded All: ${this.expandedAll}`);
   }
 
   _mapHook = hook => (

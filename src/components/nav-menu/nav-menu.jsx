@@ -26,7 +26,9 @@ class NavMenu extends Component {
       showSkipped: PropTypes.bool,
       sideNavOpen: PropTypes.bool,
       stats: PropTypes.object,
-      toggleFilter: PropTypes.func
+      toggleFilter: PropTypes.func,
+      onToggleExpand: PropTypes.func,
+      expandedAll: PropTypes.bool
     })
   };
 
@@ -44,7 +46,9 @@ class NavMenu extends Component {
       showSkipped,
       sideNavOpen,
       stats,
-      toggleFilter
+      toggleFilter,
+      onToggleExpand,
+      expandedAll
     } = this.props.reportStore;
 
     const navItemProps = {
@@ -75,6 +79,15 @@ class NavMenu extends Component {
             </h6>
           </div>
           <div className={ cx('section') }>
+            <ToggleSwitch
+              className={ cx('control') }
+              label='Expand All TestCase'
+              labelClassName={ cx('control-label') }
+              icon='expand_more'
+              iconClassName={ cx('toggle-icon-passed') }
+              active={ expandedAll }
+              toggleFn={ onToggleExpand } />
+
             <ToggleSwitch
               className={ cx('control') }
               label='Show Passed'

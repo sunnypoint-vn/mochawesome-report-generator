@@ -47,6 +47,7 @@ class ReportBody extends React.Component {
     const {
       enableCode,
       enableChart,
+      expandedAll,
       filteredSuites: suites
     } = this.props.reportStore;
 
@@ -57,7 +58,8 @@ class ReportBody extends React.Component {
             key={ suite.uuid }
             suite={ suite }
             enableChart={ enableChart }
-            enableCode={ enableCode } />))
+            enableCode={ enableCode }
+            expandedAll={ expandedAll } />))
         }
       </div>
     );

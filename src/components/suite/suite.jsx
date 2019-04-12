@@ -15,7 +15,7 @@ class Suite extends Component {
   }
 
   render() {
-    const { className, suite, enableChart, enableCode } = this.props;
+    const { className, suite, enableChart, enableCode, expandedAll } = this.props;
     const { root, rootEmpty, suites, tests, beforeHooks, afterHooks,
       uuid, title, file, duration } = suite;
 
@@ -38,7 +38,8 @@ class Suite extends Component {
         suites={ suites }
         enableChart={ enableChart }
         enableCode={ enableCode }
-        main={ isMain } />
+        main={ isMain }
+        expandedAll={ expandedAll } />
     );
 
     const testListComp = () => (hasTests || hasBeforeHooks || hasAfterHooks) && (
@@ -47,7 +48,8 @@ class Suite extends Component {
         tests={ tests }
         beforeHooks={ beforeHooks }
         afterHooks={ afterHooks }
-        enableCode={ enableCode } />
+        enableCode={ enableCode }
+        expandedAll={ expandedAll } />
     );
 
     const cxname = cx('component', className, {
@@ -103,7 +105,8 @@ Suite.propTypes = {
   suite: PropTypes.object,
   className: PropTypes.string,
   enableChart: PropTypes.bool,
-  enableCode: PropTypes.bool
+  enableCode: PropTypes.bool,
+  expandedAll: PropTypes.bool
 };
 
 export default Suite;

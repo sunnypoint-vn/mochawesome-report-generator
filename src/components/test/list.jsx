@@ -6,16 +6,16 @@ import styles from './test.css';
 
 const cx = classNames.bind(styles);
 
-const TestList = ({ className, tests, beforeHooks, afterHooks, enableCode }) => (
+const TestList = ({ className, tests, beforeHooks, afterHooks, enableCode, expandedAll }) => (
   <div className={ cx(className) }>
     { !!beforeHooks && beforeHooks.map(test => (
-      <Test key={ test.uuid } test={ test } enableCode={ enableCode } />))
+      <Test key={ test.uuid } test={ test } enableCode={ enableCode } expandedAll={ expandedAll } />))
     }
     { !!tests && tests.map(test => (
-      <Test key={ test.uuid } test={ test } enableCode={ enableCode } />))
+      <Test key={ test.uuid } test={ test } enableCode={ enableCode } expandedAll={ expandedAll } />))
     }
     { !!afterHooks && afterHooks.map(test => (
-      <Test key={ test.uuid } test={ test } enableCode={ enableCode } />))
+      <Test key={ test.uuid } test={ test } enableCode={ enableCode } expandedAll={ expandedAll } />))
     }
   </div>
 );
@@ -25,7 +25,8 @@ TestList.propTypes = {
   tests: PropTypes.array,
   beforeHooks: PropTypes.array,
   afterHooks: PropTypes.array,
-  enableCode: PropTypes.bool
+  enableCode: PropTypes.bool,
+  expandedAll: PropTypes.bool
 };
 
 TestList.displayName = 'TestList';
