@@ -24,6 +24,7 @@
 .header {
   @apply --clearfix;
 
+  display: flex;
   position: relative;
   padding: 10px 0;
   margin: 0 16px 0 13px;
@@ -33,28 +34,29 @@
   }
 }
 
-.title-wrap {
-  position: relative;
-}
-
 .title {
   @apply --font-regular;
   @apply --text-overflow;
 
+  flex-grow: 1;
   font-size: 13px;
   line-height: 24px;
   margin: 0;
-  padding: 0 80px 0 40px;
+  padding-right: 12px;
 
-  @nest .with-context & {
-    padding-right: 106px;
+  @nest .hook & {
+    color: var(--black54);
+  }
+
+  @nest .expanded & {
+    line-height: 1.5;
+    padding-top: 3px;
+    white-space: normal;
   }
 }
 
 .icon {
-  position: absolute;
-  top: 0;
-  left: 0;
+  align-self: flex-start;
   padding: 3px;
   border-radius: 50%;
   color: #fff;
@@ -79,12 +81,19 @@
     color: var(--grey100);
     background-color: var(--grey500);
   }
+
+  &.hook {
+    color: var(--black38);
+    padding: 0;
+
+    @nest .failed & {
+      color: var(--red500);
+    }
+  }
 }
 
 .info {
-  position: absolute;
-  top: 10px;
-  right: 0;
+  display: flex;
 }
 
 .duration {
@@ -92,7 +101,6 @@
 
   line-height: 24px;
   color: var(--black54);
-  float: left;
 
   @nest .component:hover:not(.pending) & {
     color: var(--black87);
@@ -106,7 +114,6 @@
 }
 
 .duration-icon {
-  float: right;
   margin-left: 4px;
   /* stylelint-disable-next-line declaration-no-important */
   line-height: 24px !important;
@@ -123,7 +130,6 @@
 
 .context-icon {
   position: relative;
-  float: left;
   /* stylelint-disable-next-line declaration-no-important */
   line-height: 24px !important;
   color: var(--black38);
@@ -145,7 +151,7 @@
 
 .error-message {
   font-size: 12px;
-  margin: 10px 0 0 0;
+  margin: 0 16px 10px 13px;
   color: var(--red500);
 }
 
@@ -165,12 +171,30 @@
   }
 }
 
-.code-diff-expected span {
-  color: #859900;
+.code-diff code > span:first-child {
+  margin-right: 11px;
 }
 
-.code-diff-actual span {
-  color: #dc322f;
+.code-diff-expected {
+  & span {
+    color: #859900;
+  }
+
+  @nest .inline-diff & {
+    background-color: #859900;
+    color: #fff;
+  }
+}
+
+.code-diff-actual {
+  & span {
+    color: #dc322f;
+  }
+
+  @nest .inline-diff & {
+    background-color: #dc322f;
+    color: #fff;
+  }
 }
 
 .code-label {
@@ -229,13 +253,13 @@
   }
 }
 
-.image-link {
+.image-link, .video-link {
   display: inline-block;
   font-size: 11px;
   padding: 0 1em 1em 1em;
 }
 
-.image {
+.image, .video {
   display: block;
   max-width: 100%;
   height: auto;
